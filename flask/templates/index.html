@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation and Sales Forecasting</title>
+    <link rel="stylesheet" href="flask\templates\styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Customer Segmentation and Sales Forecasting</h1>
+    </header>
+    <main>
+        <div class="info-container">
+            <section class="info-card" onclick="toggleInfo('segmentationInfo')">
+                <h2>Understanding Customer Segmentation</h2>
+                <div class="info-details" id="segmentationInfo">
+                    <p>Customer segmentation is the process of dividing a customer base into distinct groups based on shared characteristics. This allows businesses to tailor their marketing strategies and improve customer satisfaction. Common segmentation criteria include:</p>
+                    <ul>
+                        <li><strong>Demographics:</strong> Age, gender, income, education level.</li>
+                        <li><strong>Psychographics:</strong> Lifestyle, values, interests.</li>
+                        <li><strong>Behavior:</strong> Purchase history, brand loyalty, product usage.</li>
+                        <li><strong>Geographic:</strong> Location, climate, urban vs. rural.</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="info-card" onclick="toggleInfo('pricingInfo')">
+                <h2>Pricing Prediction</h2>
+                <div class="info-details" id="pricingInfo">
+                    <p>Pricing prediction involves analyzing various factors to determine the optimal price for a product or service. Key elements include:</p>
+                    <ul>
+                        <li><strong>Competitor Pricing:</strong> Monitoring competitors' prices to remain competitive.</li>
+                        <li><strong>Previous Sales Data:</strong> Analyzing historical sales data to identify pricing trends.</li>
+                        <li><strong>Market Trends:</strong> Understanding market demand and consumer behavior.</li>
+                        <li><strong>Cost Analysis:</strong> Evaluating production and operational costs to ensure profitability.</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="info-card" onclick="toggleInfo('marketAnalysisInfo')">
+                <h2>Market Analysis</h2>
+                <div class="info-details" id="marketAnalysisInfo">
+                    <p>Market analysis is the study of market dynamics, including customer preferences, competition, and economic conditions. It helps businesses make informed decisions and identify opportunities for growth. Important tools include:</p>
+                    <ul>
+                        <li><strong>SWOT Analysis:</strong> Identifying strengths, weaknesses, opportunities, and threats.</li>
+                        <li><strong>PEST Analysis:</strong> Analyzing political, economic, social, and technological factors.</li>
+                        <li><strong>Porter's Five Forces:</strong> Assessing industry competitiveness and profitability.</li>
+                    </ul>
+                </div>
+            </section>
+            <section class="info-card" onclick="toggleInfo('salesForecastingInfo')">
+                <h2>Sales Forecasting</h2>
+                <div class="info-details" id="salesForecastingInfo">
+                    <p>Sales forecasting uses historical data and statistical methods to predict future sales. Accurate forecasts help businesses manage inventory, allocate resources, and set realistic sales targets. Techniques include:</p>
+                    <ul>
+                        <li><strong>Time Series Analysis:</strong> Analyzing data points collected or recorded at specific time intervals.</li>
+                        <li><strong>Moving Averages:</strong> Smoothing out short-term fluctuations to identify longer-term trends.</li>
+                        <li><strong>Regression Analysis:</strong> Understanding relationships between variables to predict outcomes.</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <button id="continueButton">Upload Data</button>
+        <div class="container" id="uploadContainer" style="display: none;">
+            <div class="form-container">
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <label for="file">Select CSV File:</label>
+                    <input type="file" id="file" name="file" required>
+                    <button type="submit">Upload</button>
+                </form>
+                <div id="uploadResult" class="result"></div>
+            </div>
+            </section>
+            <section class="card">
+                <h2><i class="fas fa-chart-line"></i> Sales Forecasting</h2>
+                <input type="text" id="salesColumn" placeholder="Enter sales column name">
+                <button id="forecastButton">Forecast Sales</button>
+                <div id="forecastResult"></div>
+            </section>
+            <section class="card">
+                <h2><i class="fas fa-tags"></i> Pricing Strategy</h2>
+                <input type="text" id="pricingFeatures" placeholder="Enter features (comma separated)">
+                <input type="text" id="pricingTarget" placeholder="Enter target variable">
+                <button id="pricingButton">Predict Price</button>
+                <div id="pricingResult"></div>
+            </section>
+            <section class="card">
+                <h2><i class="fas fa-users"></i> Customer Segmentation</h2>
+                <input type="text" id="segmentationFeatures" placeholder="Enter features (comma separated)">
+                <input type="number" id="nClusters" placeholder="Number of clusters">
+                <button id="segmentationButton">Segment Customers</button>
+                <div id="segmentationResult"></div>
+            </section>
+            <section class="card">
+                <h2><i class="fas fa-chart-pie"></i> Market Share Prediction</h2>
+                <input type="text" id="marketShareFeatures" placeholder="Enter features (comma separated)">
+                <button id="marketShareButton">Predict Market Share</button>
+                <div id="marketShareResult"></div>
+            </section>
+            <section class="card">
+                <h2><i class="fas fa-eye"></i> Data Visualization</h2>
+                <button id="visualizeButton">Visualize Data</button>
+                <div id="visualizationResult"></div>
+            </section>
+            <button id="backButton" class="small-button">Back</button>
+        </div>
+    </main>
+    <script src="flask\templates\scripts.js"></script>
+</body>
+</html> 

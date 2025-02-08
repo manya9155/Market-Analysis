@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Competition Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            margin-bottom: 30px;
+        }
+        label {
+            font-weight: bold;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e4d1d1;
+            border: 1px solid #2442ca;
+        }
+    </style>
+</head>
+<body>
+    <h1>Market Competition Analysis</h1>
+
+    <div class="form-container">
+        <h2>Upload Data</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <label for="file">Select CSV File:</label>
+            <input type="file" id="file" name="file" required>
+            <button type="submit">Upload</button>
+        </form>
+        <div id="uploadResult" class="result"></div>
+    </div>
+
+    <!-- <div class="form-container">
+        <h2>Sales Forecasting</h2>
+        <form id="forecastingForm">
+            <label for="salesColumn">Sales Column:</label>
+            <input type="text" id="salesColumn" name="salesColumn" required>
+            <button type="submit">Forecast</button>
+        </form>
+        <div id="forecastingResult" class="result"></div>
+    </div> -->
+
+    <div class="form-container">
+        <h2>Pricing Strategy</h2>
+        <form id="pricingForm">
+            <label for="feature">Previous_Year_Price:</label>
+            <input type="text" id="feature" name="feature" required> <br />
+            <label for="feature">Competitor_Price:</label>
+            <input type="text" id="feature" name="feature" required><br />
+            <label for="feature">Previous_Year_Sales:</label>
+            <input type="text" id="feature" name="feature" required><br />
+            <button type="submit">Analyze</button>
+        </form>
+        <div id="pricingResult" class="result"></div>
+    </div>
+
+    <div class="form-container">
+        <h2>Customer Segmentation</h2>
+        <form id="segmentationForm">
+            <label for="segmentFeatures">Sales:</label>
+            <input type="text" id="segmentFeatures" name="segmentFeatures" required><br />
+            <label for="nClusters">Price:</label>
+            <input type="number" id="nClusters" name="nClusters" required><br />
+            <button type="submit">Segment</button>
+        </form>
+        <div id="segmentationResult" class="result"></div>
+    </div>
+
+    <div class="form-container">
+        <h2>Market Share Prediction</h2>
+        <form id="predictionForm">
+            <label>Competitor_Sales:</label> 
+                    <input type="number" name="Competitor_Sales" required /><br />
+                    <label>Advertising_Spend:</label>
+                    <input type="number" name="Advertising_Spend" required /> <br />
+                    <label>Price:</label>
+                    <input type="number" name="Price" required /> <br />
+                    <label>Customer_Rating:</label>
+                    <input type="number" name="Customer_Rating" required /> <br />
+                    <label>Product_Availability:</label>
+                    <input type="number" name="Product_Availability" required /> <br />
+                    <button type="submit">Predict</button><br />
+        </form>
+        <div id="predictionResult" class="result"></div>
+    </div>
+
+    <script>
+        async function handleSubmit(event, endpoint, resultDiv) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const jsonData = {};
+
+            formData.forEach((value, key) => {
+                jsonData[key] = key.includes('features') ? value.split(',') : value;
+            });
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonData)
+            });
+
+            const result = await response.json();
+            document.getElementById(resultDiv).textContent = JSON.stringify(result, null, 2);
+        }
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('uploadResult').textContent = JSON.stringify(result, null, 2);
+        });
+
+        // document.getElementById('forecastingForm').addEventListener('submit', (e) => handleSubmit(e, '/sales_forecasting', 'forecastingResult'));
+        document.getElementById('pricingForm').addEventListener('submit', (e) => handleSubmit(e, '/pricing_strategy', 'pricingResult'));
+        document.getElementById('segmentationForm').addEventListener('submit', (e) => handleSubmit(e, '/customer_segmentation', 'segmentationResult'));
+        document.getElementById('predictionForm').addEventListener('submit', (e) => handleSubmit(e, '/market_share_prediction', 'predictionResult'));
+    </script>
+</body>
+</html>
